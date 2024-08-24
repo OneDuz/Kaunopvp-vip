@@ -273,27 +273,14 @@ RegisterCommand("VIPPED", function()
 end)
 
 function setpednx(modelname)
-        -- Convert model name to hash
         local model = GetHashKey(modelname)
-
-        -- Request the model
         RequestModel(model)
-    
-        -- Wait until the model is loaded
         while not HasModelLoaded(model) do
             Wait(500)
         end
-    
-        -- Get the player's current ped
         local playerPed = PlayerPedId()
-    
-        -- Set the player's ped to the new model
         SetPlayerModel(PlayerId(), model)
-    
-        -- Ensure the model is no longer needed to free memory
         SetModelAsNoLongerNeeded(model)
-    
-        -- Reset the player to default
         local newPlayerPed = PlayerPedId()
         if newPlayerPed ~= playerPed then
             SetPedDefaultComponentVariation(newPlayerPed)
